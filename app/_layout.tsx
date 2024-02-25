@@ -55,7 +55,7 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Head>
-        <title>OneReality</title>
+        <title>My App</title>
         <meta
           name="description"
           content="Expo Router Instagram responsive layout demo using SCSS"

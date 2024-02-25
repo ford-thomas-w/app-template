@@ -1,6 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import { Button, Icon, ListItem } from "@rneui/base";
-import React from "react";
+import * as React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 function renderRow(item: any) {
