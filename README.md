@@ -5,12 +5,16 @@ A quick way to start a new app using stack:
 * React-native/Expo
 * UI Component Library: React-native Elements UI
 * Router: Expo's file based router
-* State management: MobX ? maybe not needed if watermelondb serves that purpose
-* Sync: WatermelonDB
+* State management: MobX
+    * https://mobx.js.org/the-gist-of-mobx.html
+* Client-side data store: WatermelonDB
+    * for offline local data storage and syncing to supabase when online for shared data
     * https://www.themorrow.digital/blog/how-to-use-watermelondb-with-react-native-expo (finish setup later)
     * https://www.themorrow.digital/blog/building-an-offline-first-app-with-expo-supabase-and-watermelondb
     * vs RxDB: https://stackshare.io/stackups/rxdb-vs-watermelondb#:~:text=In%20summary%2C%20RxDB%20and%20WatermelonDB,platform%20support%2C%20and%20community%20ecosystems.
-* Supabase
+* Backend: Supabase 
+    * use client lib for syncing auth token and user profile info
+
 
 Provides proof-of-concept for:
 

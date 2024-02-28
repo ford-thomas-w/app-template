@@ -129,5 +129,10 @@ docs/pages/versions/*/react-native/*.diff
 !crsqlite.xcframework
 
 # iOS - for now keep it all out
-/ios
 **/ios/.xcode.env.local
+
+
+# All ios/android dir code is generated
+ios
+android
+

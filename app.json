@@ -17,13 +17,15 @@
     ],
     "ios": {
       "usesAppleSignIn": true,
-      "bundleIdentifier": "com.example.myapp"
+      "bundleIdentifier": "com.example.myapp",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",
@@ -55,14 +57,18 @@
             }
           }
         }
-      ]
+      ],
+      ["@react-native-google-signin/google-signin"]
     ],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
       "eas": {
-        "projectId": "23fb5397-4080-45bd-b22e-bccf2b6e2991"
+        "projectId": "acd4d9d0-e2d3-46fa-a355-eaabac57d055"
+      },
+      "router": {
+        "origin": "http://0.0.0.0"
       }
     },
     "owner": "tford"
