@@ -131,7 +131,6 @@ docs/pages/versions/*/react-native/*.diff
 # iOS - for now keep it all out
 **/ios/.xcode.env.local
 
-
 # All ios/android dir code is generated
 ios
 android

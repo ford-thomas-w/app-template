@@ -35,3 +35,10 @@ Provides proof-of-concept for:
 3. Delete "ios" and Android folders
 4. Find in Folders "myapp" replace with the new app name
 5. Run `npx expo run ios`
+
+
+## Troubleshooting
+
+* For "npm ERR! code EACCES" issue: `sudo find ./ -user root -exec sudo chown $USER: {} +`
+* https://github.com/thorwebdev/google-signin?tab=readme-ov-file#expo-installation
+
