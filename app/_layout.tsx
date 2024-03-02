@@ -1,16 +1,19 @@
+import 'react-native-url-polyfill/auto';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import React from 'react';
 import { ResponsiveNavigator } from "@/components/navigator";
 import Head from "expo-router/head";
 import { View, Text } from '@/components/Themed';
-
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '@/utils/supabase';
+import AuthenticationScreen from "@/components/AuthenticationScreen";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,8 +52,20 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+
 function RootLayoutNav() {
+  const [session, setSession] = useState<Session | null>(null)
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, []);
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -61,7 +76,7 @@ function RootLayoutNav() {
           content="Expo Router Instagram responsive layout demo using SCSS"
         />
       </Head>
-      <ResponsiveNavigator />
+      {session && session.user ? <ResponsiveNavigator /> : <AuthenticationScreen />}
     </ThemeProvider>
   );
 }

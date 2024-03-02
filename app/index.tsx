@@ -1,15 +1,13 @@
-import AuthenticationScreen from "@/components/AuthenticationScreen";
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Page() {
   return (
-    <View style={styles.container}>
-      <AuthenticationScreen />
-      {/* <View style={styles.main}>
+    <View style={styles.container}>      
+      <View style={styles.main}>
         <Text style={styles.title}>Home</Text>
         <Text style={styles.subtitle}>Modify app/index.tsx</Text>
-      </View> */}
+      </View>
     </View>
   );
 }

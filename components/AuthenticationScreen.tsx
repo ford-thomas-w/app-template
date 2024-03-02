@@ -1,19 +1,35 @@
 import * as React from "react";
-import { Platform, StyleSheet } from 'react-native';
-import { View } from './Themed';
+import { Platform, StyleSheet, AppState } from 'react-native';
+import { View, Text } from './Themed';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { supabase } from '../utils/supabase';
-import {
-    GoogleSignin,
-    GoogleSigninButton,
-    statusCodes,
-} from '@react-native-google-signin/google-signin';
+// import {
+//     GoogleSignin,
+//     GoogleSigninButton,
+//     statusCodes,
+// } from '@react-native-google-signin/google-signin';
+
+// Tells Supabase Auth to continuously refresh the session automatically if
+// the app is in the foreground. When this is added, you will continue to receive
+// `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
+// if the user's session is terminated. This should only be registered once.
+AppState.addEventListener('change', (state) => {
+    console.log('state change: ', state)
+    if (state === 'active') {
+        supabase.auth.startAutoRefresh()
+    } else {
+        supabase.auth.stopAutoRefresh()
+    }
+})
+
 
 
 /** 
  * https://github.com/react-native-google-signin/google-signin?tab=readme-ov-file#expo-installation
+ * Finish these instructions later:
+ * https://docs.expo.dev/guides/google-authentication/#with-google-api
  */
-GoogleSignin.configure();
+// GoogleSignin.configure();
 // GoogleSignin.configure({
 //     scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
 //     webClientId: '<FROM DEVELOPER CONSOLE>', // client ID of type WEB for your server. Required to get the idToken on the user object, and for offline access.
@@ -29,23 +45,23 @@ GoogleSignin.configure();
 
 async function signinWithGoogle() {
     try {
-        await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-        const userInfo = await GoogleSignin.signIn();
-        console.log('userInfo: ', userInfo);
-        if (userInfo.idToken) {
-            passAuthTokenToSupabase('google', userInfo.idToken);
-        }
+        // await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+        // const userInfo = await GoogleSignin.signIn();
+        // console.log('userInfo: ', userInfo);
+        // if (userInfo.idToken) {
+        //     passAuthTokenToSupabase('google', userInfo.idToken);
+        // }
         // setState({ userInfo });
     } catch (error: any) {
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-            // user cancelled the login flow
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-            // operation (e.g. sign in) is in progress already
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-            // play services not available or outdated
-        } else {
-            // some other error happened
-        }
+        // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        //     // user cancelled the login flow
+        // } else if (error.code === statusCodes.IN_PROGRESS) {
+        //     // operation (e.g. sign in) is in progress already
+        // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        //     // play services not available or outdated
+        // } else {
+        //     // some other error happened
+        // }
     }
 };
 
@@ -75,6 +91,7 @@ async function signinWithApple() {
 }
 
 async function passAuthTokenToSupabase(provider: string, token: string) {
+    console.log('passAuthTokenToSupabase()');
     const {
         error,
         data: { user },
@@ -105,12 +122,12 @@ function LoginOptions() {
                 style={{ width: 200, height: 64 }}
                 onPress={signinWithApple}
             />
-            <br />
+            {/* <br />
             <GoogleSigninButton
                 size={GoogleSigninButton.Size.Wide}
                 color={GoogleSigninButton.Color.Dark}
                 onPress={signinWithGoogle}
-            />
+            /> */}
         </>
     }
     else if (Platform.OS === 'android') {
@@ -119,13 +136,14 @@ function LoginOptions() {
          * 1. Native Google Sign-in
          * 2. OAuth Apple Sign-in
          */
-        return <>
-            <GoogleSigninButton
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Dark}
-                onPress={signinWithGoogle}
-            />
-        </>
+        // return <>
+        //     <GoogleSigninButton
+        //         size={GoogleSigninButton.Size.Wide}
+        //         color={GoogleSigninButton.Color.Dark}
+        //         onPress={signinWithGoogle}
+        //     />
+        // </>
+        return <View><Text>Pending...</Text></View>
     }
     else { // Likely Platform.OS === 'web'
         /**
@@ -133,24 +151,38 @@ function LoginOptions() {
          * 1. OAuth Apple Sign-in
          * 2. OAuth Google Sign-in
          */
-        return <>
-            <GoogleSigninButton
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Dark}
-                onPress={signinWithGoogle}
-            />
-        </>
+        // return <>
+        //     <GoogleSigninButton
+        //         size={GoogleSigninButton.Size.Wide}
+        //         color={GoogleSigninButton.Color.Dark}
+        //         onPress={signinWithGoogle}
+        //     />
+        // </>
+        return <View><Text>Pending...</Text></View>
     }
     return <>{/* Implement Android Auth options. */}</>
 }
 
 export default function AuthenticationScreen() {
     return <View style={styles.container}>
-        <LoginOptions />
+        <View style={styles.main}>
+            <LoginOptions />
+        </View>
     </View>
 }
 
 const styles = StyleSheet.create({
     container: {
-    },
-}); 
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        maxWidth: 960,
+        marginHorizontal: "auto",
+      },
+      main: {
+        flex: 1,
+        justifyContent: "center",
+        maxWidth: 960,
+        marginHorizontal: "auto",
+      },
+    }); 

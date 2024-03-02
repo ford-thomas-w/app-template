@@ -27,6 +27,13 @@ Provides proof-of-concept for:
         * Google OAuth on Apple
     * Both OAuth when in browser
 
+## Steps to build this template
+
+1. https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native?auth-store=async-storage
+2. https://supabase.com/docs/guides/auth/social-login/auth-google?platform=react-native
+3. https://supabase.com/docs/guides/auth/social-login/auth-apple#generate-a-client_secret
+
+* https://github.com/thorwebdev/google-signin?tab=readme-ov-file#expo-installation
 
 ## Steps to use this template
 
