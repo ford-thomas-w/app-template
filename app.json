@@ -59,6 +59,12 @@
       ],
       [
         "@react-native-google-signin/google-signin"
+      ],
+      [
+        "expo-dev-launcher",
+        {
+          "launchModeExperimental": "most-recent"
+        }
       ]
     ],
     "experiments": {

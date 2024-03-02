@@ -36,9 +36,14 @@ Provides proof-of-concept for:
 4. Find in Folders "myapp" replace with the new app name
 5. Run `npx expo run ios`
 
+## Resources
+
+* https://github.com/thorwebdev/google-signin?tab=readme-ov-file#expo-installation
+* https://supabase.com/docs/guides/auth/social-login/auth-google?platform=react-native
+
+
 
 ## Troubleshooting
 
 * For "npm ERR! code EACCES" issue: `sudo find ./ -user root -exec sudo chown $USER: {} +`
-* https://github.com/thorwebdev/google-signin?tab=readme-ov-file#expo-installation
 
